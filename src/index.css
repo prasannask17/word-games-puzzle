@@ -310,7 +310,7 @@ button:disabled {
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 .checkbox {
   font-size: 18px;
