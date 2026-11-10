@@ -310,11 +310,17 @@ button:disabled {
   text-transform: uppercase;
   display: flex;
   align-items: center;
+  gap: 4px;
 }
 .checkbox {
   font-size: 18px;
-  margin-right: 5px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
 }
 .page-footer {
   position: absolute;
