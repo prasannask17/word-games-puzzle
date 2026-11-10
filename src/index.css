@@ -316,9 +316,9 @@ button:disabled {
 .checkbox {
   display: inline-block;
   flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  border: 1px solid #000;
+  width: 7px;
+  height: 7px;
+  border: 0.5px solid #000;
   margin-right: 3px;
   vertical-align: text-bottom;
 }
