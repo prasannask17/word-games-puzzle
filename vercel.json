@@ -4,7 +4,7 @@
   "framework": "vite",
   "functions": {
     "api/words.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "nodejs20.x@3"
     }
   },
   "rewrites": [
