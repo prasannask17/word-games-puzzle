@@ -309,15 +309,17 @@ button:disabled {
   font-weight: 600;
   text-transform: uppercase;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 2px;
+  line-height: 1;
 }
 .checkbox {
-  font-size: 11px;
+  font-size: 9.5px;
   line-height: 1;
   display: inline-block;
   flex-shrink: 0;
-  margin-top: -1px;
+  width: 1em;
+  height: 1em;
 }
 .page-footer {
   position: absolute;
