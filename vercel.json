@@ -1,0 +1,30 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "functions": {
+    "api/words.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "env": {
+    "LLM_BASE_URL": "@llm_base_url",
+    "LLM_MODEL": "@llm_model",
+    "LLM_API_KEY1": "@llm_api_key1",
+    "LLM_API_KEY2": "@llm_api_key2",
+    "LLM_FALLBACK_BASE_URL": "@llm_fallback_base_url",
+    "LLM_FALLBACK_MODEL": "@llm_fallback_model",
+    "LLM_FALLBACK_API_KEY1": "@llm_fallback_api_key1",
+    "LLM_FALLBACK_API_KEY2": "@llm_fallback_api_key2"
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: word-games-puzzle
+    runtime: node
+    buildCommand: npm run build && npm install
+    startCommand: npm run preview
+    healthCheckPath: /
+    envVars:
+      - key: LLM_BASE_URL
+        scope: run
+        value: https://api.groq.com/openai/v1
+      - key: LLM_MODEL
+        scope: run
+        value: qwen/qwen3.8-27b
+      - key: LLM_API_KEY1
+        scope: run
+        isFile: false
+      - key: LLM_API_KEY2
+        scope: run
+        isFile: false
+      - key: LLM_FALLBACK_BASE_URL
+        scope: run
+        value: https://api.cohere.ai/compatibility/v1
+      - key: LLM_FALLBACK_MODEL
+        scope: run
+        value: command-a-03-2025
+      - key: LLM_FALLBACK_API_KEY1
+        scope: run
+        isFile: false
+      - key: LLM_FALLBACK_API_KEY2
+        scope: run
+        isFile: false
+    staticPublicPath: dist
