@@ -8,14 +8,30 @@
     }
   },
   "env": {
-    "LLM_BASE_URL": "@llm_base_url",
-    "LLM_MODEL": "@llm_model",
-    "LLM_API_KEY1": "@llm_api_key1",
-    "LLM_API_KEY2": "@llm_api_key2",
-    "LLM_FALLBACK_BASE_URL": "@llm_fallback_base_url",
-    "LLM_FALLBACK_MODEL": "@llm_fallback_model",
-    "LLM_FALLBACK_API_KEY1": "@llm_fallback_api_key1",
-    "LLM_FALLBACK_API_KEY2": "@llm_fallback_api_key2"
+    "LLM_BASE_URL": {
+      "value": "https://api.groq.com/openai/v1"
+    },
+    "LLM_MODEL": {
+      "value": "qwen/qwen3.8-27b"
+    },
+    "LLM_API_KEY1": {
+      "placeholder": "your-groq-key-1"
+    },
+    "LLM_API_KEY2": {
+      "placeholder": "your-groq-key-2"
+    },
+    "LLM_FALLBACK_BASE_URL": {
+      "value": "https://api.cohere.ai/compatibility/v1"
+    },
+    "LLM_FALLBACK_MODEL": {
+      "value": "command-a-03-2025"
+    },
+    "LLM_FALLBACK_API_KEY1": {
+      "placeholder": "your-cohere-key-1"
+    },
+    "LLM_FALLBACK_API_KEY2": {
+      "placeholder": "your-cohere-key-2"
+    }
   },
   "rewrites": [
     {
