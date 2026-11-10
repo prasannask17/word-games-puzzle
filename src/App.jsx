@@ -91,7 +91,7 @@ function WordList({ words }) {
     <div className="word-list">
       {words.map((word, index) => (
         <div className="word-item" key={index}>
-          <span className="checkbox">□</span> {word}
+          <div className="checkbox"></div> {word}
         </div>
       ))}
     </div>
