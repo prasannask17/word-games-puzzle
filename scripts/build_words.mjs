@@ -45,7 +45,9 @@ const CACHE_FILE = path.join(OUT_DIR, "valid_cache.json");
 const CONCURRENCY = Number(process.env.CONCURRENCY || 4);
 const VALIDATE_CONCURRENCY = Number(process.env.VALIDATE_CONCURRENCY || 6);
 
-const { generateTopicWords, GENERIC } = await import("../api/_lib/words.js");
+const { generateTopicWords, GENERIC, isInappropriate } = await import(
+  "../api/_lib/words.js"
+);
 
 async function loadJson(file, fallback) {
   if (!existsSync(file)) return fallback;
@@ -65,8 +67,9 @@ function normalize(word) {
 function acceptable(word) {
   return (
     word.length >= 3 &&
-    word.length <= 15 &&
-    !GENERIC.has(word.toLowerCase())
+    word.length <= 8 &&
+    !GENERIC.has(word.toLowerCase()) &&
+    !isInappropriate(word)
   );
 }
 
@@ -149,9 +152,8 @@ async function datamuseRelated(topic) {
 
 function mix(words) {
   return {
-    easy: words.filter((w) => w.length <= 6).length,
-    medium: words.filter((w) => w.length >= 7 && w.length <= 8).length,
-    tricky: words.filter((w) => w.length >= 9).length,
+    easy: words.filter((w) => w.length <= 8).length,
+    long: words.filter((w) => w.length > 8).length,
   };
 }
 
@@ -233,7 +235,7 @@ async function main() {
         console.log(
           `[${completed}/${topics.length}] ${topic} -> ${words.join(
             ", ",
-          )} (easy ${m.easy}, medium ${m.medium}, tricky ${m.tricky})`,
+          )} (easy ${m.easy}, long ${m.long})`,
         );
         await save(OUT_FILE, results);
         await save(CACHE_FILE, validCache);

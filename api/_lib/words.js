@@ -1,4 +1,5 @@
 import { buildPrompt } from "./prompt.js";
+import { isInappropriate } from "./blocklist.js";
 
 const GENERIC = new Set(
   "thing things stuff people person persons type types kind kinds form forms part parts system systems process processes related various different used using make made new old first last many most some such other large small famous character characters equipment item items style styles service services supply supplies tool tools trait traits feeling feelings accessory accessories cosmetic cosmetics instrument instruments".split(
@@ -122,8 +123,9 @@ function providerConfigs() {
 function clean(raw) {
   const words = raw
     .map((word) => String(word).toUpperCase().replace(/[^A-Z]/g, ""))
-    .filter((word) => word.length >= 3 && word.length <= 15)
-    .filter((word) => !GENERIC.has(word.toLowerCase()));
+    .filter((word) => word.length >= 3 && word.length <= 8)
+    .filter((word) => !GENERIC.has(word.toLowerCase()))
+    .filter((word) => !isInappropriate(word));
   return Array.from(new Set(words));
 }
 
@@ -166,10 +168,9 @@ function extractWords(content) {
 }
 
 function mixHint(words) {
-  const easy = words.filter((word) => word.length <= 6).length;
-  const tricky = words.filter((word) => word.length >= 9).length;
-  if (easy >= 4 && tricky >= 3) return "";
-  return `\n\nCorrection: include at least 4 easy words of 3-6 letters and at least 3 tricky words of 9-15 letters. Return exactly 16 words.`;
+  const hard = words.filter((word) => word.length > 8).length;
+  if (hard === 0) return "";
+  return `\n\nCorrection: every word must be easy, common, 3-8 letters long and suitable for young children. Do not use long, tricky or inappropriate words. Return exactly 16 words.`;
 }
 
 function llmError(prefix, status, text) {
@@ -345,4 +346,4 @@ export async function generateTopicWords(topic, options = {}) {
   throw lastError || new Error(`Could not generate words for "${cleanTopic}"`);
 }
 
-export { GENERIC };
+export { GENERIC, isInappropriate };
